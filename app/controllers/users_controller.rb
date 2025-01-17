@@ -15,18 +15,22 @@ class UsersController < ApplicationController
     all_users.each do |x|
       emails.push(x.email)
     end
+    puts(emails)
     if emails.include?(the_email)
       the_user = User.where( :email => the_email)
       upw = the_user.password
       if the_pw == upw
+        puts("success")
         @user = the_user
         redirect_to("/users/home", notice: "Login successful" )
       else 
         redirect_to("/users/loreg", alert: "The email or password was wrong!" )
       end
-    else 
+    else
+      puts("fail") 
       redirect_to("/users/loreg", alert: "The email or password was wrong!" )
     end
+    puts("processed")
       #@list_of_users = matching_users.order({ :created_at => :desc })
   end
 

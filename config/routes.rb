@@ -28,7 +28,7 @@ Rails.application.routes.draw do
   get("/users/home", {:controller => "users", :action => "index"})
 
   # CREATE
-  post("/insert_user", { :controller => "users", :action => "create" })
+  post("/users/sign_up", { :controller => "users", :action => "create" })
           
   # READ
   get("/users", { :controller => "users", :action => "index" })

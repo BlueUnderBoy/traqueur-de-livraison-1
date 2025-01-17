@@ -20,7 +20,7 @@ class UsersController < ApplicationController
       pass = the_user.password
       if pass == the_pw
         @user = the_user
-        render({ :template => "home"})
+        render({ :template => "/users/home"})
       else 
         redirect_to("/users/loreg", alert: "The email or password was wrong!" )
       end
@@ -28,6 +28,11 @@ class UsersController < ApplicationController
       redirect_to("/users/loreg", alert: "The email or password was wrong!" )
     end
       #@list_of_users = matching_users.order({ :created_at => :desc })
+  end
+
+  def index
+    @uid = @user.id
+    render( :template => "/users/home")
   end
 
   def show

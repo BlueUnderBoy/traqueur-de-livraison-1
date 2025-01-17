@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   get("/users/sign_in", {:controller => "users", :action => "validate"})
 
-  get("/home", {:controller => "users", :action => "index"})
+  get("/users/home", {:controller => "users", :action => "index"})
 
   # CREATE
   post("/insert_user", { :controller => "users", :action => "create" })

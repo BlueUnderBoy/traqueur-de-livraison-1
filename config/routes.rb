@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   #------------------------------
 
   # Routes for the User resource:
-  root to: "users#loreg"
+  root to: "users#loreg"S
 
   get("/users/sign_up", {:controller => "users", :action => "sup"})
 

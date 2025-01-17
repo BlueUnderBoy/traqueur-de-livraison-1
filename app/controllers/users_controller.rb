@@ -13,14 +13,14 @@ class UsersController < ApplicationController
     emails = []
     all_users = User.all
     all_users.each do |x|
-      emails.push(x["email"])
+      emails.push(x.email)
     end
     if emails.include?(the_email)
       the_user = User.where( :email => the_email)
       upw = the_user.password
       if the_pw == upw
         @user = the_user
-        render({ :template => "/users/home"})
+        redirect_to("/users/home", notice: "Login successful" )
       else 
         redirect_to("/users/loreg", alert: "The email or password was wrong!" )
       end
@@ -50,7 +50,7 @@ class UsersController < ApplicationController
     all_users = User.all
     all_users.each do |x|
       emails.push(x["email"])
-    end
+      end
     the_user = User.new
     the_user.email = params.fetch("email")
     the_user.password = params.fetch("password")
@@ -63,14 +63,19 @@ class UsersController < ApplicationController
         if the_user.password == pc
           the_user.save
           @user = the_user.id
-          redirect_to("/users/home", { :notice => "User created successfully." })
+          redirect_to("/users/home", notice: "User created successfully." )
         else 
           redirect_to("/users/sign_up", alert: "The passwords do not match!" )
         end
       else
-        redirect_to("/users/sign_up", { :alert => the_user.errors.full_messages.to_sentence })
+        redirect_to("/users/sign_up", alert: "Invalid user" )
       end
     end
+  end
+
+  def exit 
+    @user = ""
+    redirect_to("/", notice: "Logout successful")
   end
 
   def update

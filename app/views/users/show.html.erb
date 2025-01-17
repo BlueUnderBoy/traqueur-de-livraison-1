@@ -1,7 +1,7 @@
 <div>
   <div>
     <h1>
-      User #<%= @the_user.id %> details
+      User #<!-- @user.id --> details
     </h1>
 
     <div>
@@ -12,7 +12,7 @@
       </div>
 
       <div>
-        <a href="/delete_user/<%= @the_user.id %>">
+        <a href="/delete_user/##">
           Delete user
         </a>
       </div>
@@ -23,28 +23,28 @@
         Email
       </dt>
       <dd>
-        <%= @the_user.email %>
+        <!-- @user.email -->
       </dd>
 
       <dt>
         Password
       </dt>
       <dd>
-        <%= @the_user.password %>
+        <!-- @user.password -->
       </dd>
 
       <dt>
         Created at
       </dt>
       <dd>
-        <%= time_ago_in_words(@the_user.created_at) %> ago
+        <!-- time_ago_in_words(@user.created_at)  ago-->
       </dd>
 
       <dt>
         Updated at
       </dt>
       <dd>
-        <%= time_ago_in_words(@the_user.updated_at) %> ago
+        <!-- time_ago_in_words(@user.updated_at)  ago--> 
       </dd>
     </dl>
   </div>
@@ -59,21 +59,20 @@
       Edit user
     </h2>
 
-    <form action="/modify_user/<%= @the_user.id %>"  method="post" >
+    <form action="/modify_user/##"  method="post" ><!--value=" @user.id -->
       <div>
         <label for="email_box">
           Email
         </label>
 
-        <input type="text" id="email_box" name="query_email" value="<%= @the_user.email %>">
+        <input type="text" id="email_box" name="query_email"><!--value=" @user.email -->
       </div>
 
       <div>
         <label for="password_box">
           Password
         </label>
-
-        <input type="text" id="password_box" name="query_password" value="<%= @the_user.password %>">
+        <input type="text" id="password_box" name="query_password" "><!--value=" @user.password -->
       </div>
 
       <button>

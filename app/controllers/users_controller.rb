@@ -31,7 +31,7 @@ class UsersController < ApplicationController
   end
 
   def index
-    @uid = @user.id
+    @uid = @user
     render( :template => "/users/home")
   end
 
@@ -59,9 +59,10 @@ class UsersController < ApplicationController
     if emails.include?(the_user.email)
       redirect_to("/users/sign_up", alert: "That email is already registered!" )
     else
-      if the_user.valid? && the_user.email.presence? && the_user.password.presence?
+      if the_user.valid?
         if the_user.password == pc
           the_user.save
+          @user = the_user.id
           redirect_to("/users/home", { :notice => "User created successfully." })
         else 
           redirect_to("/users/sign_up", alert: "The passwords do not match!" )

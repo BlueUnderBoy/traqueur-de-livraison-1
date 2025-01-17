@@ -54,13 +54,18 @@ class UsersController < ApplicationController
     the_user = User.new
     the_user.email = params.fetch("email")
     the_user.password = params.fetch("password")
+    pc = params.fetch("pc")
     
     if emails.include?(the_user.email)
       redirect_to("/users/sign_up", alert: "That email is already registered!" )
     else
       if the_user.valid? && the_user.email.presence? && the_user.password.presence?
-        the_user.save
-        redirect_to("/users/home", { :notice => "User created successfully." })
+        if the_user.password == pc
+          the_user.save
+          redirect_to("/users/home", { :notice => "User created successfully." })
+        else 
+          redirect_to("/users/sign_up", alert: "The passwords do not match!" )
+        end
       else
         redirect_to("/users/sign_up", { :alert => the_user.errors.full_messages.to_sentence })
       end

@@ -17,8 +17,8 @@ class UsersController < ApplicationController
     end
     if emails.include?(the_email)
       the_user = User.where( :email => the_email)
-      pass = the_user.password
-      if pass == the_pw
+      upw = the_user.password
+      if the_pw == upw
         @user = the_user
         render({ :template => "/users/home"})
       else 

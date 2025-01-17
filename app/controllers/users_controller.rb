@@ -46,15 +46,24 @@ class UsersController < ApplicationController
   end
 
   def create
+    emails = []
+    all_users = User.all
+    all_users.each do |x|
+      emails.push(x["email"])
+    end
     the_user = User.new
     the_user.email = params.fetch("email")
     the_user.password = params.fetch("password")
-
-    if the_user.valid? && the_user.email.presence? && the_user.password.presence?
-      the_user.save
-      redirect_to("/users", { :notice => "User created successfully." })
+    
+    if emails.include?(the_user.email)
+      redirect_to("/users/sign_up", alert: "That email is already registered!" )
     else
-      redirect_to("/users/sign_up", { :alert => the_user.errors.full_messages.to_sentence })
+      if the_user.valid? && the_user.email.presence? && the_user.password.presence?
+        the_user.save
+        redirect_to("/users/home", { :notice => "User created successfully." })
+      else
+        redirect_to("/users/sign_up", { :alert => the_user.errors.full_messages.to_sentence })
+      end
     end
   end
 

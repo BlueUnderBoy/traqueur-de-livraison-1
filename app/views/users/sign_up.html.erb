@@ -31,8 +31,11 @@
     <hr>
 
     <h2>Sign up</h2>
+    <div><%= notice %></div>
+    
+    <div><%= alert %></div>
 
-    <form class="new_user" id="new_user" action="/users" accept-charset="UTF-8" method="post">
+    <form class="new_user" id="new_user" action="/users/sign_up" accept-charset="UTF-8" method="post">
       <div class="field">
         <label for="email">Email</label><br>
         <input type="email" value="" name="email" id="email">

@@ -18,7 +18,7 @@ class UsersController < ApplicationController
     puts(emails)
     if emails.include?(the_email)
       the_user = User.where( :email => the_email)
-      upw = the_user.password
+      upw = the_user.at(0).password
       if the_pw == upw
         puts("success")
         @user = the_user

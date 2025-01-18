@@ -1,0 +1,76 @@
+<html>
+  <head>
+    <style type="text/css">.turbo-progress-bar {
+      position: fixed;
+      display: block;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: #0076ff;
+      z-index: 2147483647;
+      transition:
+        width 300ms ease-out,
+        opacity 150ms 150ms ease-in;
+      transform: translate3d(0, 0, 0);}
+    </style>
+    <title>Target: Delivery Tracker 1</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="csrf-param" content="authenticity_token">
+
+    <meta name="csp-nonce">
+  </head>
+
+  <body>
+
+    <nav>
+        <a href="/">Delivery Tracker</a>
+        |
+        <a href="/users/edit">Edit profile</a>
+        |
+        <a href="/users/sign_out">Sign out</a>
+    </nav>
+
+    <hr>
+
+
+
+    <h2>Edit User</h2>
+
+    <form class="edit_user" id="edit_user" action="/users" accept-charset="UTF-8" method="post">
+      <div class="field">
+        <label for="user_email">Email</label><br>
+        <input autofocus="autofocus" autocomplete="email" type="email" value="email@email.com" name="user[email]" id="user_email">
+      </div>
+
+
+      <div class="field">
+        <label for="user_password">Password</label> <i>(leave blank if you don't want to change it)</i><br>
+        <input autocomplete="new-password" type="password" name="user[password]" id="user_password">
+          <br>
+          <em>6 characters minimum</em>
+      </div>
+
+      <div class="field">
+        <label for="user_password_confirmation">Password confirmation</label><br>
+        <input autocomplete="new-password" type="password" name="user[password_confirmation]" id="user_password_confirmation">
+      </div>
+
+      <div class="field">
+        <label for="user_current_password">Current password</label> <i>(we need your current password to confirm your changes)</i><br>
+        <input autocomplete="current-password" type="password" name="user[current_password]" id="user_current_password">
+      </div>
+
+      <div class="actions">
+        <input type="submit" name="commit" value="Update" data-disable-with="Update">
+      </div>
+    </form>
+    <h3>Cancel my account</h3>
+
+    <div>Unhappy? <form class="button_to" method="post" action="/users"><input type="hidden" name="_method" value="delete" autocomplete="off"><button data-confirm="Are you sure?" data-turbo-confirm="Are you sure?" type="submit">Cancel my account</button><input type="hidden" name="authenticity_token" value="8x8NjzrxVKu1gSyywemCMKchGcQkC9pMjHuzK0eycFLg5hpZD6w7s3pEMykknGCSCkvDfsUsBTkRFmBnX2w1rQ" autocomplete="off"></form></div>
+
+      <a href="https://delivery-tracker-1.matchthetarget.com/">Back</a>
+
+  
+
+  </body>
+</html>

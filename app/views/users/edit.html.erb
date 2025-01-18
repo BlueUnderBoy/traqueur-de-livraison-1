@@ -15,9 +15,6 @@
     </style>
     <title>Target: Delivery Tracker 1</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="csrf-param" content="authenticity_token">
-
-    <meta name="csp-nonce">
   </head>
 
   <body>
@@ -36,28 +33,28 @@
 
     <h2>Edit User</h2>
 
-    <form class="edit_user" id="edit_user" action="/users" accept-charset="UTF-8" method="post">
+    <form class="edit_user" id="edit_user" action="/users" method="post">
       <div class="field">
-        <label for="user_email">Email</label><br>
-        <input autofocus="autofocus" autocomplete="email" type="email" value="email@email.com" name="user[email]" id="user_email">
+        <label for="email">Email</label><br>
+        <input type="email" value="@user.email" name="email" id="email">
       </div>
 
 
       <div class="field">
-        <label for="user_password">Password</label> <i>(leave blank if you don't want to change it)</i><br>
-        <input autocomplete="new-password" type="password" name="user[password]" id="user_password">
+        <label for="password">Password</label> <i>(leave blank if you don't want to change it)</i><br>
+        <input type="password" name="password" id="password">
           <br>
           <em>6 characters minimum</em>
       </div>
 
       <div class="field">
-        <label for="user_password_confirmation">Password confirmation</label><br>
-        <input autocomplete="new-password" type="password" name="user[password_confirmation]" id="user_password_confirmation">
+        <label for="pwc">Password confirmation</label><br>
+        <input type="password" name="pwc" id="pwc">
       </div>
 
       <div class="field">
-        <label for="user_current_password">Current password</label> <i>(we need your current password to confirm your changes)</i><br>
-        <input autocomplete="current-password" type="password" name="user[current_password]" id="user_current_password">
+        <label for="pw">Current password</label> <i>(we need your current password to confirm your changes)</i><br>
+        <input type="password" name="pw" id="pw">
       </div>
 
       <div class="actions">
@@ -66,11 +63,13 @@
     </form>
     <h3>Cancel my account</h3>
 
-    <div>Unhappy? <form class="button_to" method="post" action="/users"><input type="hidden" name="_method" value="delete" autocomplete="off"><button data-confirm="Are you sure?" data-turbo-confirm="Are you sure?" type="submit">Cancel my account</button><input type="hidden" name="authenticity_token" value="8x8NjzrxVKu1gSyywemCMKchGcQkC9pMjHuzK0eycFLg5hpZD6w7s3pEMykknGCSCkvDfsUsBTkRFmBnX2w1rQ" autocomplete="off"></form></div>
+    <div>Unhappy? 
+      <form class="button_to" method="post" action="/users">
+        <input type="hidden" name="_method" value="delete" autocomplete="off">
+        <button data-confirm="Are you sure?" data-turbo-confirm="Are you sure?" type="submit">Cancel my account</button>
+      </form>
+    </div>
 
-      <a href="https://delivery-tracker-1.matchthetarget.com/">Back</a>
-
-  
-
+      <a href="/users/home">Back</a>
   </body>
 </html>

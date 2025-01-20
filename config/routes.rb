@@ -27,6 +27,8 @@ Rails.application.routes.draw do
 
   get("/users/home", {:controller => "users", :action => "index"})
 
+  get("/users/edit", {:controller => "users", :action => "edit"}
+
   get("/users/sign_out" , {:controller => "users", :action => "exit" })
 
   # CREATE

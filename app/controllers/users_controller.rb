@@ -82,6 +82,10 @@ class UsersController < ApplicationController
     redirect_to("/", notice: "Logout successful")
   end
 
+  def edit
+    render({ :template => "/users/edit" })
+  end
+
   def update
     the_id = params.fetch("path_id")
     the_user = User.where({ :id => the_id }).at(0)
@@ -103,6 +107,6 @@ class UsersController < ApplicationController
 
     the_user.destroy
 
-    redirect_to("/users", { :notice => "User deleted successfully."} )
+    redirect_to("/", { :notice => "User deleted successfully."} )
   end
 end

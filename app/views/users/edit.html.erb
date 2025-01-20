@@ -64,7 +64,7 @@
     <h3>Cancel my account</h3>
 
     <div>Unhappy? 
-      <form class="button_to" method="post" action="/delete_user/<%= @user.id %>">
+      <form class="button_to" action="/delete_user/<%= @user.id %>" method="post">
         <button data-confirm="Are you sure?" data-turbo-confirm="Are you sure?" type="submit">Cancel my account</button>
       </form>
     </div>

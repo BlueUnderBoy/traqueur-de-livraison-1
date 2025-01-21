@@ -21,11 +21,11 @@
   </head>
 
   <body>
-
+    <% uid = params.fetch("uid")%>
     <nav>
-      <a href="/users/home">Delivery Tracker</a>
+      <a href="/users/home/<%= uid %>">Delivery Tracker</a>
         |
-        <a href="/users/edit">Edit profile</a>
+        <a href="/users/edit/<%= uid %>">Edit profile</a>
         |
         <a href="/users/sign_out">Sign out</a>
     </nav>
@@ -54,7 +54,6 @@
         </h2>
 
         <form action="/insert_delivery" method="post">
-          <input type="hidden" id="user_id" value="<%= @uid %>">
           <div>
             <label for="description">
               Description

@@ -25,9 +25,9 @@ Rails.application.routes.draw do
 
   get("/users/sign_in", {:controller => "users", :action => "validate"})
 
-  get("/users/home", {:controller => "users", :action => "index"})
+  get("/users/home/:uid", {:controller => "users", :action => "index"})
 
-  get("/users/edit", {:controller => "users", :action => "edit"})
+  get("/users/edit/:uid", {:controller => "users", :action => "edit"})
 
   get("/users/sign_out", {:controller => "users", :action => "exit" })
 
@@ -41,10 +41,10 @@ Rails.application.routes.draw do
   
   # UPDATE
   
-  post("/modify_user/:path_id", { :controller => "users", :action => "update" })
+  post("/modify_user/:uid", { :controller => "users", :action => "update" })
   
   # DELETE
-  get("/delete_user/:path_id", { :controller => "users", :action => "destroy" })
+  get("/delete_user/:uid", { :controller => "users", :action => "destroy" })
 
   #------------------------------
 

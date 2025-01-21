@@ -18,11 +18,11 @@
   </head>
 
   <body>
-
+    <% uid = params.fetch("uid") %>
     <nav>
-        <a href="/">Delivery Tracker</a>
+        <a href="/users/home/<%= uid %>">Delivery Tracker</a>
         |
-        <a href="/users/edit">Edit profile</a>
+        <a href="/users/edit/<%= uid %>">Edit profile</a>
         |
         <a href="/users/sign_out">Sign out</a>
     </nav>
@@ -64,11 +64,11 @@
     <h3>Cancel my account</h3>
 
     <div>Unhappy? 
-      <form class="button_to" action="/delete_user/<%= @@uid %>" method="post">
+      <form class="button_to" action="/delete_user/<%= uid %>" method="post">
         <button data-confirm="Are you sure?" data-turbo-confirm="Are you sure?" type="submit">Cancel my account</button>
       </form>
     </div>
 
-      <a href="/users/home">Back</a>
+      <a href="/users/home/<%= uid %>">Back</a>
   </body>
 </html>

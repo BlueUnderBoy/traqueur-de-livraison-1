@@ -18,10 +18,11 @@ class UsersController < ApplicationController
     if emails.include?(the_email)
       the_user = User.where( :email => the_email)
       upw = the_user.at(0).password
-      if the_pw == upw
+      if the_pw == upw 
         @user = the_user
         @uid = the_user.at(0).id
-        redirect_to("/users/home", notice: "Login successful" )
+        Rails.logger.info("Variable from validate " + @uid.to_s)
+        redirect_to("/users/home/#{@uid}", notice: "Login successful")
       else 
         redirect_to("/users/loreg", alert: "The email or password was wrong!" )
       end
@@ -32,7 +33,7 @@ class UsersController < ApplicationController
   end
 
   def index
-    render( :template => "/users/home")
+    render({ :template => "/users/home"})
   end
 
   def show
@@ -64,7 +65,7 @@ class UsersController < ApplicationController
           the_user.save
           @user = the_user.id
           @uid = the_user.id
-          redirect_to("/users/home", notice: "User created successfully." )
+          redirect_to("/users/home/#{@uid}", notice: "User created successfully.")
         else 
           redirect_to("/users/sign_up", alert: "The passwords do not match!" )
         end
@@ -75,12 +76,11 @@ class UsersController < ApplicationController
   end
 
   def exit 
-    @uid = ""
     redirect_to("/", notice: "Logout successful")
   end
 
   def edit
-    render({ :template => "/users/edit", locals: { users: @uid }})
+    render({ :template => "/users/edit"})
   end
 
   def update
@@ -99,7 +99,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    the_id = params.fetch("path_id")
+    the_id = params.fetch("uid")
     the_user = User.where({ :id => the_id }).at(0)
 
     the_user.destroy

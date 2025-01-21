@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   # Routes for the Delivery resource:
 
   # CREATE
-  post("/insert_delivery", { :controller => "deliveries", :action => "create" })
+  post("/insert_delivery/:uid", { :controller => "deliveries", :action => "create" })
           
   # READ
   get("/deliveries", { :controller => "deliveries", :action => "index" })

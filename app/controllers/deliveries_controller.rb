@@ -19,16 +19,16 @@ class DeliveriesController < ApplicationController
 
   def create
     the_delivery = Delivery.new
-    the_delivery.description = params.fetch("query_description")
-    the_delivery.expected_on = params.fetch("query_expected_on")
-    the_delivery.details = params.fetch("query_details")
-    the_delivery.user = params.fetch("query_user")
+    the_delivery.description = params.fetch("description")
+    the_delivery.expected_on = params.fetch("expected_on")
+    the_delivery.details = params.fetch("details")
+    the_delivery.user = params.fetch("user")
 
     if the_delivery.valid?
       the_delivery.save
-      redirect_to("/deliveries", { :notice => "Delivery created successfully." })
+      redirect_to("/users/home/#{the_delivery.user}", { :notice => "Delivery created successfully." })
     else
-      redirect_to("/deliveries", { :alert => the_delivery.errors.full_messages.to_sentence })
+      redirect_to("/users/home/#{the_delivery.user}", { :alert => "Invalid delivery info!" })
     end
   end
 

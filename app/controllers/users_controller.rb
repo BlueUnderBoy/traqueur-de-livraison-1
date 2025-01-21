@@ -20,7 +20,7 @@ class UsersController < ApplicationController
       upw = the_user.at(0).password
       if the_pw == upw
         @user = the_user
-        $uid = the_user.at(0).id
+        @uid = the_user.at(0).id
         redirect_to("/users/home", notice: "Login successful" )
       else 
         redirect_to("/users/loreg", alert: "The email or password was wrong!" )
@@ -63,7 +63,7 @@ class UsersController < ApplicationController
         if the_user.password == pc
           the_user.save
           @user = the_user.id
-          $uid = the_user.id
+          @uid = the_user.id
           redirect_to("/users/home", notice: "User created successfully." )
         else 
           redirect_to("/users/sign_up", alert: "The passwords do not match!" )
@@ -75,12 +75,12 @@ class UsersController < ApplicationController
   end
 
   def exit 
-    $uid = ""
+    @uid = ""
     redirect_to("/", notice: "Logout successful")
   end
 
   def edit
-    render({ :template => "/users/edit" })
+    render({ :template => "/users/edit", locals: { users: @uid }})
   end
 
   def update

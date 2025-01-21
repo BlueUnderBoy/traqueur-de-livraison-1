@@ -21,7 +21,7 @@ class UsersController < ApplicationController
       if the_pw == upw 
         @user = the_user
         @uid = the_user.at(0).id
-        Rails.logger.info("Variable from validate " + @uid.to_s)
+
         redirect_to("/users/home/#{@uid}", notice: "Login successful")
       else 
         redirect_to("/users/loreg", alert: "The email or password was wrong!" )
@@ -84,17 +84,39 @@ class UsersController < ApplicationController
   end
 
   def update
-    the_id = params.fetch("path_id")
+    the_id = params.fetch("uid")
     the_user = User.where({ :id => the_id }).at(0)
+ 
+    the_email = params.fetch("email")
+    the_password = params.fetch("password")
+    pw = params.fetch("pw")
 
-    the_user.email = params.fetch("email")
-    the_user.password = params.fetch("password")
+    ue = the_user.email
 
-    if the_user.valid?
-      the_user.save
-      redirect_to("/users/#{the_user.id}", { :notice => "User updated successfully."} )
+    emails = []
+    all_users = User.all
+    all_users.each do |x|
+      emails.push(x["email"])
+      end
+    pc = params.fetch("pc")
+
+    emails.delete(ue)
+    
+    if emails.include?(the_user.email)
+      redirect_to("/users/sign_up", alert: "That email is already registered!" )
     else
-      redirect_to("/users/#{the_user.id}", { :alert => the_user.errors.full_messages.to_sentence })
+      if the_user.valid?
+        if the_user.password == pw && the_password == pc
+          the_user.email = the_email
+          the_user.save
+          @uid = the_id
+          redirect_to("/users/home/#{@uid}", notice: "User updated successfully.")
+        else 
+          redirect_to("/users/edit/#{@uid}", alert: "One of the passwords are incorrect!" )
+        end
+      else
+        redirect_to("/users/edit/#{@uid}", alert: "Invalid user" )
+      end
     end
   end
 

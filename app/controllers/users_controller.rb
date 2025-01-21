@@ -15,27 +15,23 @@ class UsersController < ApplicationController
     all_users.each do |x|
       emails.push(x.email)
     end
-    puts(emails)
     if emails.include?(the_email)
       the_user = User.where( :email => the_email)
       upw = the_user.at(0).password
       if the_pw == upw
-        puts("success")
         @user = the_user
+        $uid = the_user.at(0).id
         redirect_to("/users/home", notice: "Login successful" )
       else 
         redirect_to("/users/loreg", alert: "The email or password was wrong!" )
       end
     else
-      puts("fail") 
       redirect_to("/users/loreg", alert: "The email or password was wrong!" )
     end
-    puts("processed")
       #@list_of_users = matching_users.order({ :created_at => :desc })
   end
 
   def index
-    @uid = @user
     render( :template => "/users/home")
   end
 
@@ -67,6 +63,7 @@ class UsersController < ApplicationController
         if the_user.password == pc
           the_user.save
           @user = the_user.id
+          $uid = the_user.id
           redirect_to("/users/home", notice: "User created successfully." )
         else 
           redirect_to("/users/sign_up", alert: "The passwords do not match!" )
@@ -78,7 +75,7 @@ class UsersController < ApplicationController
   end
 
   def exit 
-    @user = ""
+    $uid = ""
     redirect_to("/", notice: "Logout successful")
   end
 

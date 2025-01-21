@@ -6,6 +6,7 @@
 #  description :string
 #  details     :text
 #  expected_on :date
+#  rec         :string
 #  user        :integer
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null

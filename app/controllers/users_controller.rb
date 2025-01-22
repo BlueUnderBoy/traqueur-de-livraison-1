@@ -1,4 +1,8 @@
 class UsersController < ApplicationController
+  def home
+    render("/u2/home")
+  end
+
   def loreg
     render({ :template => "users/loreg" })
   end

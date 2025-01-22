@@ -1,0 +1,139 @@
+<html>
+  <head>
+    <style type="text/css">.turbo-progress-bar {
+      position: fixed;
+      display: block;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: #0076ff;
+      z-index: 2147483647;
+      transition:
+        width 300ms ease-out,
+        opacity 150ms 150ms ease-in;
+      transform: translate3d(0, 0, 0);}
+    </style>
+    <title>Target: Delivery Tracker 1</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="csrf-param" content="authenticity_token">
+
+    <meta name="csp-nonce">
+  </head>
+
+  <body>
+    <% uid = params.fetch("uid")%>
+    <nav>
+      <a href="/">Delivery Tracker</a>
+        |
+        <a href="/users">Edit profile</a>
+        |
+        <a href="/users/sign_out">Sign out</a>
+    </nav>
+
+    <hr>
+
+    <p>Welcome! You have signed up successfully.</p>
+
+
+    <div>
+      <div>
+        <h1>
+          Delivery Tracker
+        </h1>
+
+        <p>Know if something gets lost in the mail.</p>
+      </div>
+    </div>
+
+    <hr>
+
+    <div>
+      <div>
+        <h2>
+          Expecting a package?
+        </h2>
+
+        <form action="/insert_delivery" method="post">
+          <div>
+            <label for="description">
+              Description
+            </label>
+
+            <input type="text" id="description" name="description">
+          </div>
+
+          <div>
+            <label for="expected_on">
+              Supposed to arrive on
+            </label>
+
+            <input type="date" id="expected_on" name="expected_on">
+          </div>
+
+          <div>
+            <label for="details">
+              Details
+            </label>
+
+            <textarea id="details" name="details" rows="3"></textarea>
+          </div>
+          <input type="hidden" id="user" name="user">
+
+          <button>
+            Log delivery
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="waiting_on" style="background-color: #EADAA2">
+    <% dels = Delivery.where({:user => uid})%>
+      <h2>Waiting on</h2>
+      <% dels.each do |x|%>
+        <% if x.rec == "no" %>
+          <ul>
+            <li>
+              <div>
+                <%= x.description %>
+              </div>
+              <div>
+                Supposed to arrive on <%= x.expected_on %>
+              </div>
+              <div>
+                <%= x.details %>
+              </div>
+              <div>
+                <form action="/modify_delivery/<%= x.id %>" method="post">
+                  <button>Mark as received</button>
+                </form>
+              </div>
+            </li>
+          </ul>
+        <% end %>
+      <% end %>
+    </div>
+
+    <hr>
+
+    <div class="received" style="background-color: lightgreen">
+    <% dels = Delivery.where({:user => uid})%>
+      <h2>Received</h2>
+      <% dels.each do |x|%>
+        <% if x.rec == "yes" %>
+          <ul>
+            <li>
+              <div>
+                <%= x.description %>
+              </div>
+              <div>
+                Updated <%= x.updated_at %> <a href="delete_delivery/<%= x.id %>"> Delete</a>
+              </div>
+            </li>
+          </ul>
+        <% end %>
+      <% end %>
+    </div>
+  </body>
+</html>

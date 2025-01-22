@@ -23,6 +23,7 @@ class DeliveriesController < ApplicationController
     the_delivery.expected_on = params.fetch("expected_on")
     the_delivery.details = params.fetch("details")
     the_delivery.user = params.fetch("user")
+    the_delivery.rec = "no"
 
     if the_delivery.valid?
       the_delivery.save
@@ -33,28 +34,26 @@ class DeliveriesController < ApplicationController
   end
 
   def update
-    the_id = params.fetch("path_id")
+    the_id = params.fetch("did")
     the_delivery = Delivery.where({ :id => the_id }).at(0)
 
-    the_delivery.description = params.fetch("query_description")
-    the_delivery.expected_on = params.fetch("query_expected_on")
-    the_delivery.details = params.fetch("query_details")
-    the_delivery.user = params.fetch("query_user")
+    the_delivery.rec = "yes"
 
     if the_delivery.valid?
       the_delivery.save
-      redirect_to("/deliveries/#{the_delivery.id}", { :notice => "Delivery updated successfully."} )
+      redirect_to("/users/home/#{the_delivery.user}", { :notice => "Delivery updated successfully."} )
     else
-      redirect_to("/deliveries/#{the_delivery.id}", { :alert => the_delivery.errors.full_messages.to_sentence })
+      redirect_to("/users/home/#{the_delivery.user}", { :alert => "Delivery was not updated"})
     end
   end
 
   def destroy
-    the_id = params.fetch("path_id")
+    the_id = params.fetch("did")
     the_delivery = Delivery.where({ :id => the_id }).at(0)
+    duser = the_delivery.user
 
     the_delivery.destroy
 
-    redirect_to("/deliveries", { :notice => "Delivery deleted successfully."} )
+    redirect_to("/users/home/#{duser}", { :notice => "Delivery deleted successfully."} )
   end
 end

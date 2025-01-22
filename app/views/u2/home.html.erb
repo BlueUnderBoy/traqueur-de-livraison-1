@@ -21,7 +21,6 @@
   </head>
 
   <body>
-    <% uid = params.fetch("uid")%>
     <nav>
       <a href="/">Delivery Tracker</a>
         |
@@ -89,51 +88,17 @@
     <hr>
 
     <div class="waiting_on" style="background-color: #EADAA2">
-    <% dels = Delivery.where({:user => uid})%>
       <h2>Waiting on</h2>
-      <% dels.each do |x|%>
-        <% if x.rec == "no" %>
-          <ul>
-            <li>
-              <div>
-                <%= x.description %>
-              </div>
-              <div>
-                Supposed to arrive on <%= x.expected_on %>
-              </div>
-              <div>
-                <%= x.details %>
-              </div>
-              <div>
-                <form action="/modify_delivery/<%= x.id %>" method="post">
-                  <button>Mark as received</button>
-                </form>
-              </div>
-            </li>
-          </ul>
-        <% end %>
-      <% end %>
+        <ul>
+        </ul>
     </div>
 
     <hr>
 
     <div class="received" style="background-color: lightgreen">
-    <% dels = Delivery.where({:user => uid})%>
       <h2>Received</h2>
-      <% dels.each do |x|%>
-        <% if x.rec == "yes" %>
-          <ul>
-            <li>
-              <div>
-                <%= x.description %>
-              </div>
-              <div>
-                Updated <%= x.updated_at %> <a href="delete_delivery/<%= x.id %>"> Delete</a>
-              </div>
-            </li>
-          </ul>
-        <% end %>
-      <% end %>
+        <ul>
+        </ul>
     </div>
   </body>
 </html>
